@@ -1,0 +1,4 @@
+paths-ignore:
+  - build
+  - coverage
+  - node_modules
