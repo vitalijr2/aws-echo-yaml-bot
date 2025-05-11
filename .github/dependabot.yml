@@ -1,7 +1,9 @@
 version: 2
 updates:
+  # Maintain dependencies for NPM
   - package-ecosystem: "npm" # See documentation for possible values
     directory: "/" # Location of package manifests
     schedule:
       interval: "weekly"
       day: "saturday"
+    target-branch: "development"
