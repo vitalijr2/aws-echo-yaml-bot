@@ -1,0 +1,40 @@
+{
+  "name": "aws-echo-yaml-bot",
+  "version": "1.0.0",
+  "description": "The Telegram bot echoes all messages in YAML format and runs on AWS Lambda",
+  "keywords": [
+    "aws",
+    "chatbot",
+    "serverless",
+    "telegram",
+    "webhook-bot",
+    "yaml"
+  ],
+  "homepage": "https://github.com/vitalijr2/aws-echo-yaml-bot#readme",
+  "bugs": {
+    "url": "https://github.com/vitalijr2/aws-echo-yaml-bot/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vitalijr2/aws-echo-yaml-bot.git"
+  },
+  "license": "Apache-2.0",
+  "author": "Vitalij Berdinskikh <Vitalij_R2@outlook.com>",
+  "type": "module",
+  "main": "webhook-bot.js",
+  "scripts": {
+    "build": "esbuild src/webhook-bot.ts --bundle --outdir=build --platform=node --target=node22",
+    "clean": "rm -rf build",
+    "test": "jest --coverage"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.149",
+    "esbuild": "^0.25.4",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.3.2"
+  },
+  "dependencies": {
+    "telegram-escape": "^1.1.1",
+    "yaml": "^2.7.1"
+  }
+}
