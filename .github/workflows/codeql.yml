@@ -28,7 +28,7 @@ jobs:
         node-version: [22.x]
         include:
         - language: javascript-typescript
-          build-mode: manual
+          build-mode: none
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
