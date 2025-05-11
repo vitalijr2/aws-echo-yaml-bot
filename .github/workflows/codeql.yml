@@ -1,0 +1,53 @@
+name: "CodeQL"
+
+on:
+  push:
+    branches: [ "**" ]
+    tags-ignore:
+      - v*
+  pull_request:
+    # The branches below must be a subset of the branches above
+    branches: [ "**" ]
+
+permissions: read-all
+
+jobs:
+  analyze:
+    name: Analyze
+    # Runner size impacts CodeQL analysis time. To learn more, please see:
+    #   - https://gh.io/recommended-hardware-resources-for-running-codeql
+    #   - https://gh.io/supported-runners-and-hardware-resources
+    #   - https://gh.io/using-larger-runners (GitHub.com only)
+    # Consider using larger runners or machines with greater resources for possible analysis time improvements.
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: [22.x]
+        include:
+        - language: javascript-typescript
+          build-mode: manual
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    - name: Initialize CodeQL
+      uses: github/codeql-action/init@v3
+      with:
+        languages: ${{matrix.language}}
+        build-mode: ${{matrix.build-mode}}
+    - name: Build with NPM
+      run: |
+        npm ci
+        npm run build
+        npm test
+    - name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@v3
+      with:
+        category: "/language:${{matrix.language}}"
